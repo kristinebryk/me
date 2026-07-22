@@ -1,0 +1,23 @@
+{
+  "breads": [
+    { "file": "1.jpg", "caption": "Sourdough boule, 48-hour cold ferment" },
+    { "file": "2.jpg" },
+    { "file": "3.jpg", "caption": "Braided challah, egg wash finish" },
+    { "file": "4.jpg" },
+    { "file": "5.jpg" }
+  ],
+  "viennoiserie": [
+    { "file": "1.jpg" },
+    { "file": "2.jpg", "caption": "Pain au chocolat, double chocolate batons" },
+    { "file": "3.jpg" },
+    { "file": "4.jpg" },
+    { "file": "5.jpg" }
+  ],
+  "desserts": [
+    { "file": "1.jpg", "caption": "Three-tier wedding cake, buttercream florals" },
+    { "file": "2.jpg" },
+    { "file": "3.jpg" },
+    { "file": "4.jpg" },
+    { "file": "5.jpg" }
+  ]
+}

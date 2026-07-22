@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kristine - Baker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="deco" style="top:90px; left:2%; width:52px; height:52px; transform:rotate(-12deg);">
+        <svg viewBox="0 0 64 64">
+            <path d="M32 4c-4 8-4 14 0 18 4-4 4-10 0-18z" fill="#9CAA7E" />
+            <rect x="18" y="26" width="28" height="26" rx="10" fill="#DCE4CB" />
+        </svg>
+    </div>
+    <div class="deco hide-mobile" style="top:60px; right:4%; width:46px; height:46px; transform:rotate(10deg);">
+        <svg viewBox="0 0 64 64">
+            <rect x="8" y="30" width="48" height="6" rx="3" fill="#9CAA7E" />
+            <circle cx="14" cy="33" r="7" fill="#9CAA7E" />
+            <circle cx="50" cy="33" r="7" fill="#9CAA7E" />
+        </svg>
+    </div>
+    <div class="deco hide-mobile" style="top:400px; left:1%; width:56px; height:56px; transform:rotate(8deg);">
+        <svg viewBox="0 0 64 64">
+            <ellipse cx="32" cy="34" rx="22" ry="14" fill="#DCE4CB" stroke="#5F6B44" stroke-width="2" />
+            <path d="M14 34c4-4 10-6 18-6s14 2 18 6" stroke="#5F6B44" stroke-width="2" fill="none" />
+        </svg>
+    </div>
+    <div class="deco" style="top:420px; right:2%; width:44px; height:44px; transform:rotate(-8deg);">
+        <svg viewBox="0 0 64 64">
+            <path d="M32 6l4 14h14l-11 9 4 14-11-8-11 8 4-14-11-9h14z" fill="#D9A441" opacity="0.7" />
+        </svg>
+    </div>
+    <div class="deco hide-mobile" style="top:760px; left:2%; width:48px; height:48px; transform:rotate(-6deg);">
+        <svg viewBox="0 0 64 64">
+            <path d="M14 26h36l-4 26a6 6 0 0 1-6 5H24a6 6 0 0 1-6-5L14 26z" fill="#D9A441" opacity="0.65" />
+            <path d="M12 26c0-8 9-14 20-14s20 6 20 14" fill="none" stroke="#5F6B44" stroke-width="3" />
+        </svg>
+    </div>
+    <div class="deco" style="top:1080px; right:3%; width:50px; height:50px; transform:rotate(10deg);">
+        <svg viewBox="0 0 64 64">
+            <path d="M32 4c-4 8-4 14 0 18 4-4 4-10 0-18z" fill="#5F6B44" opacity="0.6" />
+            <rect x="18" y="26" width="28" height="26" rx="10" fill="#9CAA7E" opacity="0.6" />
+        </svg>
+    </div>
+
+    <div class="wrap">
+
+        <header class="hero">
+            <img class="hero-photo" src="images/profile.jpg" alt="">
+            <h1>Hi, I'm Kristine!</h1>
+            <p>Five years of baking bread, pastry, and cake — trained in classical French technique, powered by good
+                olive oil and better butter. Everything here is made by hand, in small batches, with real ingredients.
+            </p>
+        </header>
+
+        <div class="divider">
+            <svg viewBox="0 0 220 22" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 11 Q 20 2, 38 11 T 74 11 T 110 11 T 146 11 T 182 11 T 218 11" stroke="#9CAA7E"
+                    stroke-width="2" stroke-linecap="round" fill="none" />
+            </svg>
+        </div>
+
+        <section class="gallery-section" data-category="breads">
+            <div class="section-head">
+                <h2>Artisan Breads</h2>
+            </div>
+            <div class="carousel-viewport">
+                <div class="carousel-track" data-track="breads"></div>
+            </div>
+            <div class="browse-row"><button class="browse-btn" data-open-browser="breads">
+                    <svg viewBox="0 0 20 20" fill="none">
+                        <rect x="2" y="2" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="11" y="2" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="2" y="11" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="11" y="11" width="7" height="7" rx="1.5" fill="#fff" />
+                    </svg>
+                    View all
+                </button></div>
+        </section>
+
+        <div class="divider">
+            <svg viewBox="0 0 220 22" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 11 Q 20 2, 38 11 T 74 11 T 110 11 T 146 11 T 182 11 T 218 11" stroke="#D9A441"
+                    stroke-width="2" stroke-linecap="round" fill="none" />
+            </svg>
+        </div>
+
+        <section class="gallery-section" data-category="viennoiserie">
+            <div class="section-head">
+                <h2>Viennoiserie &amp; Pastries</h2>
+            </div>
+            <div class="carousel-viewport">
+                <div class="carousel-track" data-track="viennoiserie"></div>
+            </div>
+            <div class="browse-row"><button class="browse-btn" data-open-browser="viennoiserie">
+                    <svg viewBox="0 0 20 20" fill="none">
+                        <rect x="2" y="2" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="11" y="2" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="2" y="11" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="11" y="11" width="7" height="7" rx="1.5" fill="#fff" />
+                    </svg>
+                    View all
+                </button></div>
+        </section>
+
+        <div class="divider">
+            <svg viewBox="0 0 220 22" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 11 Q 20 2, 38 11 T 74 11 T 110 11 T 146 11 T 182 11 T 218 11" stroke="#9CAA7E"
+                    stroke-width="2" stroke-linecap="round" fill="none" />
+            </svg>
+        </div>
+
+        <section class="gallery-section" data-category="desserts">
+            <div class="section-head">
+                <h2>Cakes &amp; Confections</h2>
+            </div>
+            <div class="carousel-viewport">
+                <div class="carousel-track" data-track="desserts"></div>
+            </div>
+            <div class="browse-row"><button class="browse-btn" data-open-browser="desserts">
+                    <svg viewBox="0 0 20 20" fill="none">
+                        <rect x="2" y="2" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="11" y="2" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="2" y="11" width="7" height="7" rx="1.5" fill="#fff" />
+                        <rect x="11" y="11" width="7" height="7" rx="1.5" fill="#fff" />
+                    </svg>
+                    View all
+                </button></div>
+        </section>
+
+        <footer>made with love (and good olive oil)</footer>
+    </div>
+
+    <div class="browser-modal" id="browserModal">
+        <div class="browser-inner">
+            <div class="browser-header">
+                <h2 id="browserTitle">Gallery</h2>
+                <button class="browser-close" id="browserClose" aria-label="Close">&times;</button>
+            </div>
+            <div id="browserPosts"></div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-inner">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
+            <img id="lightboxImg" src="" alt="">
+            <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">&#8250;</button>
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <script>
+        var CATEGORY_TITLES = {
+            breads: "Artisan Breads",
+            viennoiserie: "Viennoiserie & Pastries",
+            desserts: "Cakes & Confections"
+        };
+
+        var galleryData = {};
+
+        async function loadGalleryData() {
+            var gallery = await fetch('images/gallery.json').then(function (r) { return r.json(); });
+
+            Object.keys(gallery).forEach(function (key) {
+                galleryData[key] = {
+                    title: CATEGORY_TITLES[key] || key,
+                    items: gallery[key].map(function (entry) {
+                        return { src: 'images/' + key + '/' + entry.file, caption: entry.caption || '' };
+                    })
+                };
+            });
+        }
+
+        function buildCarousels() {
+            Object.keys(galleryData).forEach(function (key) {
+                var track = document.querySelector('.carousel-track[data-track="' + key + '"]');
+                var items = galleryData[key].items;
+                if (!track) return;
+
+                if (items.length === 0) {
+                    track.closest('.carousel-viewport').innerHTML = '<p class="empty-note">Photos coming soon.</p>';
+                    return;
+                }
+
+                var html = '';
+                [items, items].forEach(function (set) {
+                    set.forEach(function (item, i) {
+                        html += '<button class="thumb" data-category="' + key + '" data-index="' + i + '">' +
+                            '<img src="' + item.src + '" alt="' + (item.caption || galleryData[key].title) + '" loading="lazy">' +
+                            '</button>';
+                    });
+                });
+                track.innerHTML = html;
+
+                var viewport = track.closest('.carousel-viewport');
+                viewport.addEventListener('touchstart', function () { track.classList.add('paused'); }, { passive: true });
+            });
+        }
+
+        // ---- Lightbox ----
+        var lightbox = document.getElementById('lightbox');
+        var lightboxImg = document.getElementById('lightboxImg');
+        var lightboxCaption = document.getElementById('lightboxCaption');
+        var currentItems = [];
+        var currentIndex = 0;
+
+        function openLightbox(categoryKey, index) {
+            currentItems = galleryData[categoryKey].items;
+            currentIndex = index;
+            showImage();
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function showImage() {
+            var item = currentItems[currentIndex];
+            lightboxImg.src = item.src;
+            lightboxImg.alt = item.caption || 'Enlarged photo';
+            lightboxCaption.textContent = item.caption || '';
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = document.getElementById('browserModal').classList.contains('open') ? 'hidden' : '';
+        }
+        function showNext() { currentIndex = (currentIndex + 1) % currentItems.length; showImage(); }
+        function showPrev() { currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length; showImage(); }
+
+        document.body.addEventListener('click', function (e) {
+            var thumb = e.target.closest('.thumb');
+            if (thumb) openLightbox(thumb.getAttribute('data-category'), parseInt(thumb.getAttribute('data-index'), 10));
+        });
+
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxNext').addEventListener('click', showNext);
+        document.getElementById('lightboxPrev').addEventListener('click', showPrev);
+        lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+
+        document.addEventListener('keydown', function (e) {
+            if (lightbox.classList.contains('open')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') showNext();
+                if (e.key === 'ArrowLeft') showPrev();
+            }
+        });
+
+        var touchStartX = 0;
+        lightbox.addEventListener('touchstart', function (e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        lightbox.addEventListener('touchend', function (e) {
+            var dx = e.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(dx) > 40) { if (dx < 0) showNext(); else showPrev(); }
+        }, { passive: true });
+
+        // ---- Blog-style image browser ----
+        var browserModal = document.getElementById('browserModal');
+        var browserTitle = document.getElementById('browserTitle');
+        var browserPosts = document.getElementById('browserPosts');
+
+        document.querySelectorAll('[data-open-browser]').forEach(function (btn) {
+            btn.addEventListener('click', function () { openBrowser(btn.getAttribute('data-open-browser')); });
+        });
+
+        function openBrowser(key) {
+            var data = galleryData[key];
+            browserTitle.textContent = data.title;
+            browserPosts.innerHTML = data.items.map(function (item, i) {
+                return '<div class="browser-post" data-category="' + key + '" data-index="' + i + '">' +
+                    '<img src="' + item.src + '" alt="' + (item.caption || data.title) + '" loading="lazy">' +
+                    (item.caption ? '<div class="caption">' + item.caption + '</div>' : '') +
+                    '</div>';
+            }).join('');
+            browserModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        browserPosts.addEventListener('click', function (e) {
+            var post = e.target.closest('.browser-post');
+            if (post) openLightbox(post.getAttribute('data-category'), parseInt(post.getAttribute('data-index'), 10));
+        });
+
+        document.getElementById('browserClose').addEventListener('click', function () {
+            browserModal.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+
+        // ---- Init ----
+        loadGalleryData().then(buildCarousels).catch(function (err) {
+            console.error('Could not load images/manifest.json', err);
+        });
+    </script>
+
+</body>
+
+</html>
