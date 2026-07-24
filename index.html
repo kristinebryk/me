@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Kristine - Baker</title>
+    <title>Baking Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,11 +71,10 @@
 
         <section class="gallery-section" data-category="breads">
             <div class="section-head">
-                <h2>Artisan Breads</h2>
+                <h2>Artisan Breads &amp; Pastries</h2>
+                <p class="section-subtitle">Sourdough loaves, laminated croissants, and everything in between</p>
             </div>
-            <div class="carousel-viewport">
-                <div class="carousel-track" data-track="breads"></div>
-            </div>
+            <div class="mosaic-grid" data-mosaic="breads"></div>
             <div class="browse-row"><button class="browse-btn" data-open-browser="breads">
                     <svg viewBox="0 0 20 20" fill="none">
                         <rect x="2" y="2" width="7" height="7" rx="1.5" fill="#fff" />
@@ -94,14 +93,13 @@
             </svg>
         </div>
 
-        <section class="gallery-section" data-category="viennoiserie">
+        <section class="gallery-section" data-category="cookies">
             <div class="section-head">
-                <h2>Viennoiserie &amp; Pastries</h2>
+                <h2>Cookies &amp; Chocolates</h2>
+                <p class="section-subtitle">Hand-decorated cookies, truffles, and small-batch confections</p>
             </div>
-            <div class="carousel-viewport">
-                <div class="carousel-track" data-track="viennoiserie"></div>
-            </div>
-            <div class="browse-row"><button class="browse-btn" data-open-browser="viennoiserie">
+            <div class="mosaic-grid" data-mosaic="cookies"></div>
+            <div class="browse-row"><button class="browse-btn" data-open-browser="cookies">
                     <svg viewBox="0 0 20 20" fill="none">
                         <rect x="2" y="2" width="7" height="7" rx="1.5" fill="#fff" />
                         <rect x="11" y="2" width="7" height="7" rx="1.5" fill="#fff" />
@@ -121,11 +119,10 @@
 
         <section class="gallery-section" data-category="desserts">
             <div class="section-head">
-                <h2>Cakes &amp; Confections</h2>
+                <h2>Cakes &amp; Specialty Desserts</h2>
+                <p class="section-subtitle">Celebration cakes, tarts, and made-to-order showpieces</p>
             </div>
-            <div class="carousel-viewport">
-                <div class="carousel-track" data-track="desserts"></div>
-            </div>
+            <div class="mosaic-grid" data-mosaic="desserts"></div>
             <div class="browse-row"><button class="browse-btn" data-open-browser="desserts">
                     <svg viewBox="0 0 20 20" fill="none">
                         <rect x="2" y="2" width="7" height="7" rx="1.5" fill="#fff" />
@@ -137,7 +134,7 @@
                 </button></div>
         </section>
 
-        <footer>made with love (and good olive oil)</footer>
+        <footer>· made with love (and good olive oil) ·</footer>
     </div>
 
     <div class="browser-modal" id="browserModal">
@@ -162,50 +159,71 @@
 
     <script>
         var CATEGORY_TITLES = {
-            breads: "Artisan Breads",
-            viennoiserie: "Viennoiserie & Pastries",
-            desserts: "Cakes & Confections"
+            breads: "Artisan Breads & Pastries",
+            cookies: "Cookies & Chocolates",
+            desserts: "Cakes & Specialty Desserts"
         };
 
-        var galleryData = {};
+        var galleryData = {}; // filled in after fetching manifest + captions
 
         async function loadGalleryData() {
-            var gallery = await fetch('images/gallery.json').then(function (r) { return r.json(); });
+            var gallery = await fetch('images/gallery.json').then(function (r) {return r.json();});
 
             Object.keys(gallery).forEach(function (key) {
                 galleryData[key] = {
                     title: CATEGORY_TITLES[key] || key,
                     items: gallery[key].map(function (entry) {
-                        return { src: 'images/' + key + '/' + entry.file, caption: entry.caption || '' };
+                        return {src: 'images/' + key + '/' + entry.file, caption: entry.caption || ''};
                     })
                 };
             });
         }
 
-        function buildCarousels() {
+        var TILE_COUNT = 4;
+
+        function buildMosaics() {
             Object.keys(galleryData).forEach(function (key) {
-                var track = document.querySelector('.carousel-track[data-track="' + key + '"]');
+                var grid = document.querySelector('.mosaic-grid[data-mosaic="' + key + '"]');
                 var items = galleryData[key].items;
-                if (!track) return;
+                if (!grid) return;
 
                 if (items.length === 0) {
-                    track.closest('.carousel-viewport').innerHTML = '<p class="empty-note">Photos coming soon.</p>';
+                    grid.innerHTML = '<p class="empty-note">Photos coming soon.</p>';
                     return;
                 }
 
-                var html = '';
-                [items, items].forEach(function (set) {
-                    set.forEach(function (item, i) {
-                        html += '<button class="thumb" data-category="' + key + '" data-index="' + i + '">' +
-                            '<img src="' + item.src + '" alt="' + (item.caption || galleryData[key].title) + '" loading="lazy">' +
-                            '</button>';
-                    });
-                });
-                track.innerHTML = html;
+                grid.innerHTML = '';
+                for (var i = 0; i < TILE_COUNT; i++) {
+                    var startIndex = i % items.length;
+                    var tile = document.createElement('button');
+                    tile.className = 'mosaic-tile tile-' + (i + 1);
+                    tile.setAttribute('data-category', key);
+                    tile.setAttribute('data-index', startIndex);
+                    tile.innerHTML = '<img src="' + items[startIndex].src + '" alt="' +
+                        (items[startIndex].caption || galleryData[key].title) + '" loading="lazy">';
+                    grid.appendChild(tile);
 
-                var viewport = track.closest('.carousel-viewport');
-                viewport.addEventListener('touchstart', function () { track.classList.add('paused'); }, { passive: true });
+                    // stagger each tile on its own slow, semi-random timer so the motion feels ambient, not busy
+                    if (items.length > 1) {
+                        (function (t) {
+                            setInterval(function () {cycleTile(t, key);}, 7000 + Math.random() * 6000);
+                        })(tile);
+                    }
+                }
             });
+        }
+
+        function cycleTile(tile, key) {
+            var items = galleryData[key].items;
+            var idx = (parseInt(tile.getAttribute('data-index'), 10) + 1) % items.length;
+            tile.setAttribute('data-index', idx);
+            var img = tile.querySelector('img');
+            img.style.opacity = 0;
+            setTimeout(function () {
+                img.src = items[idx].src;
+                img.alt = items[idx].caption || galleryData[key].title;
+                img.style.opacity = 1;
+            }, 600);
         }
 
         // ---- Lightbox ----
@@ -232,18 +250,18 @@
             lightbox.classList.remove('open');
             document.body.style.overflow = document.getElementById('browserModal').classList.contains('open') ? 'hidden' : '';
         }
-        function showNext() { currentIndex = (currentIndex + 1) % currentItems.length; showImage(); }
-        function showPrev() { currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length; showImage(); }
+        function showNext() {currentIndex = (currentIndex + 1) % currentItems.length; showImage();}
+        function showPrev() {currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length; showImage();}
 
         document.body.addEventListener('click', function (e) {
-            var thumb = e.target.closest('.thumb');
-            if (thumb) openLightbox(thumb.getAttribute('data-category'), parseInt(thumb.getAttribute('data-index'), 10));
+            var tile = e.target.closest('.mosaic-tile');
+            if (tile) openLightbox(tile.getAttribute('data-category'), parseInt(tile.getAttribute('data-index'), 10));
         });
 
         document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
         document.getElementById('lightboxNext').addEventListener('click', showNext);
         document.getElementById('lightboxPrev').addEventListener('click', showPrev);
-        lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+        lightbox.addEventListener('click', function (e) {if (e.target === lightbox) closeLightbox();});
 
         document.addEventListener('keydown', function (e) {
             if (lightbox.classList.contains('open')) {
@@ -254,11 +272,11 @@
         });
 
         var touchStartX = 0;
-        lightbox.addEventListener('touchstart', function (e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        lightbox.addEventListener('touchstart', function (e) {touchStartX = e.changedTouches[0].screenX;}, {passive: true});
         lightbox.addEventListener('touchend', function (e) {
             var dx = e.changedTouches[0].screenX - touchStartX;
-            if (Math.abs(dx) > 40) { if (dx < 0) showNext(); else showPrev(); }
-        }, { passive: true });
+            if (Math.abs(dx) > 40) {if (dx < 0) showNext(); else showPrev();}
+        }, {passive: true});
 
         // ---- Blog-style image browser ----
         var browserModal = document.getElementById('browserModal');
@@ -266,7 +284,7 @@
         var browserPosts = document.getElementById('browserPosts');
 
         document.querySelectorAll('[data-open-browser]').forEach(function (btn) {
-            btn.addEventListener('click', function () { openBrowser(btn.getAttribute('data-open-browser')); });
+            btn.addEventListener('click', function () {openBrowser(btn.getAttribute('data-open-browser'));});
         });
 
         function openBrowser(key) {
@@ -293,8 +311,8 @@
         });
 
         // ---- Init ----
-        loadGalleryData().then(buildCarousels).catch(function (err) {
-            console.error('Could not load images/manifest.json', err);
+        loadGalleryData().then(buildMosaics).catch(function (err) {
+            console.error('Could not load images/gallery.json', err);
         });
     </script>
 

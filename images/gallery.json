@@ -6,7 +6,7 @@
     { "file": "4.jpg" },
     { "file": "5.jpg" }
   ],
-  "viennoiserie": [
+  "cookies": [
     { "file": "1.jpg" },
     { "file": "2.jpg", "caption": "Pain au chocolat, double chocolate batons" },
     { "file": "3.jpg" },
