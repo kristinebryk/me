@@ -6,7 +6,7 @@
     --olive-dark: #3E4630;
     --gold: #D9A441;
     --category-heading-font: "Bookman Old Style", "Century Schoolbook", "Clarendon Condensed", Georgia, serif;
-    --mosaic-row-height: 160px;
+    --mosaic-row-height: 270px;
   }
   * { box-sizing:border-box; }
   body {
@@ -15,7 +15,7 @@
     /* Subtle sesame-seed texture across the whole page. Transparency is baked
        into the SVG itself (fill-opacity), which is why it's so faint. To make
        it more/less visible, adjust the fill-opacity values below (currently 0.05). */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23C9A66B'%3E%3Cellipse cx='14' cy='20' rx='4' ry='2' fill-opacity='0.05' transform='rotate(20 14 20)'/%3E%3Cellipse cx='60' cy='10' rx='4' ry='2' fill-opacity='0.05' transform='rotate(-15 60 10)'/%3E%3Cellipse cx='96' cy='40' rx='4' ry='2' fill-opacity='0.05' transform='rotate(40 96 40)'/%3E%3Cellipse cx='30' cy='70' rx='4' ry='2' fill-opacity='0.05' transform='rotate(-30 30 70)'/%3E%3Cellipse cx='80' cy='90' rx='4' ry='2' fill-opacity='0.05' transform='rotate(10 80 90)'/%3E%3Cellipse cx='108' cy='108' rx='4' ry='2' fill-opacity='0.05' transform='rotate(-45 108 108)'/%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23C9A66B'%3E%3Cellipse cx='14' cy='20' rx='4' ry='2' fill-opacity='0.1' transform='rotate(20 14 20)'/%3E%3Cellipse cx='60' cy='10' rx='4' ry='2' fill-opacity='0.06' transform='rotate(-15 60 10)'/%3E%3Cellipse cx='96' cy='40' rx='4' ry='2' fill-opacity='0.05' transform='rotate(40 96 40)'/%3E%3Cellipse cx='30' cy='70' rx='4' ry='2' fill-opacity='0.07' transform='rotate(-30 30 70)'/%3E%3Cellipse cx='80' cy='90' rx='4' ry='2' fill-opacity='0.08' transform='rotate(10 80 90)'/%3E%3Cellipse cx='108' cy='108' rx='4' ry='2' fill-opacity='0.04' transform='rotate(-45 108 108)'/%3E%3C/g%3E%3C/svg%3E");
     background-repeat: repeat;
     color: var(--olive-dark);
     font-family:'Quicksand', sans-serif;
@@ -45,17 +45,17 @@
   }
   header.hero p { max-width: 56ch; margin: 0 auto; color:#516041; font-weight:500; }
 
-  .divider { display:flex; flex-direction:column; align-items:center; gap: 6px; margin: 40px 0 0; }
+  .divider { display:flex; justify-content:center; margin: 64px 0 0; }
   .divider svg { width: 200px; height: 34px; }
-  .divider svg.squiggle { height: 12px; }
 
-  section.gallery-section { padding: 46px 0 8px; position: relative; }
+  section.gallery-section { padding: 20px 0 55px; position: relative; }
 
   .section-head { display:flex; align-items:center; justify-content:center; margin-bottom: 20px; }
   .section-head h2 {
     font-family: var(--category-heading-font);
     font-weight: 600;
-    font-size: 1.6rem;
+    font-size: clamp(1.05rem, 5.5vw, 1.6rem);
+    white-space: nowrap;
     color: var(--olive);
     margin: 0;
     letter-spacing: 0.01em;
@@ -64,21 +64,21 @@
   /* smaller, semi-transparent "view all" pill, sits below the mosaic.
      TO ADJUST OPACITY: change the two "opacity:" values below
      (first is default state, second/.hover is on mouseover). */
-  .browse-row { display:flex; justify-content:center; margin-top: 12px; }
+  .browse-row { display:flex; justify-content:center; margin-top: 20px; }
   .browse-btn {
     display:flex; align-items:center; gap:6px;
     background: rgba(95,107,68,0.55);
     color: #fff;
     border: none;
     border-radius: 999px;
-    padding: 5px 14px 5px 10px;
+    padding: 10px 20px 10px 20px;
     font-family:'Quicksand', sans-serif;
     font-weight: 600;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     letter-spacing: 0.02em;
     cursor: pointer;
     transition: background 0.2s ease, opacity 0.2s ease;
-    opacity: 0.85; /* <-- default opacity of the "View all" button */
+    opacity: 0.9;
   }
   .browse-btn:hover { background: rgba(95,107,68,0.85); opacity: 1; /* <-- opacity on hover */ }
   .browse-btn svg { width:10px; height:10px; flex-shrink:0; }

@@ -85,15 +85,12 @@
         </header>
 
         <div class="divider">
-            <svg class="squiggle" viewBox="0 0 200 14" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 7 Q 18 1, 34 7 T 66 7 T 98 7 T 130 7 T 162 7 T 198 7" stroke="#9CAA7E" stroke-width="2"
-                    stroke-linecap="round" fill="none" />
-            </svg>
             <!-- rolling pin -->
             <svg viewBox="0 0 200 34" xmlns="http://www.w3.org/2000/svg">
                 <rect x="6" y="12" width="20" height="10" rx="4" fill="#F6F4EA" stroke="#C9A66B" stroke-width="1.5" />
-                <rect x="24" y="10" width="152" height="14" rx="7" fill="#C9A66B" />
-                <rect x="24" y="10" width="152" height="5" rx="2.5" fill="#DCC098" opacity="0.6" />
+                <path d="M24 10 C 70 7, 130 7, 176 10 L176 24 C130 27, 70 27, 24 24 Z" fill="#C9A66B" />
+                <path d="M24 10 C 70 7, 130 7, 176 10 L176 15 C130 12.5, 70 12.5, 24 15 Z" fill="#DCC098"
+                    opacity="0.6" />
                 <rect x="174" y="12" width="20" height="10" rx="4" fill="#F6F4EA" stroke="#C9A66B" stroke-width="1.5" />
             </svg>
         </div>
@@ -115,16 +112,13 @@
         </section>
 
         <div class="divider">
-            <svg class="squiggle" viewBox="0 0 200 14" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 7 Q 18 1, 34 7 T 66 7 T 98 7 T 130 7 T 162 7 T 198 7" stroke="#D9A441" stroke-width="2"
-                    stroke-linecap="round" fill="none" />
-            </svg>
-            <!-- whisk -->
+            <!-- rolling pin -->
             <svg viewBox="0 0 200 34" xmlns="http://www.w3.org/2000/svg">
-                <rect x="4" y="12" width="26" height="10" rx="4" fill="#3E2B1D" />
-                <path d="M30 17c30-14 100-14 130-1M30 17c30-9 100-9 130 3M30 17c30-4 100-4 130 6M30 17c30 1 100 1 130 9"
-                    stroke="#B8B8B8" stroke-width="2" fill="none" stroke-linecap="round" />
-                <circle cx="162" cy="21" r="3" fill="#B8B8B8" />
+                <rect x="6" y="12" width="20" height="10" rx="4" fill="#F6F4EA" stroke="#C9A66B" stroke-width="1.5" />
+                <path d="M24 10 C 70 7, 130 7, 176 10 L176 24 C130 27, 70 27, 24 24 Z" fill="#C9A66B" />
+                <path d="M24 10 C 70 7, 130 7, 176 10 L176 15 C130 12.5, 70 12.5, 24 15 Z" fill="#DCC098"
+                    opacity="0.6" />
+                <rect x="174" y="12" width="20" height="10" rx="4" fill="#F6F4EA" stroke="#C9A66B" stroke-width="1.5" />
             </svg>
         </div>
 
@@ -145,14 +139,13 @@
         </section>
 
         <div class="divider">
-            <svg class="squiggle" viewBox="0 0 200 14" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 7 Q 18 1, 34 7 T 66 7 T 98 7 T 130 7 T 162 7 T 198 7" stroke="#9CAA7E" stroke-width="2"
-                    stroke-linecap="round" fill="none" />
-            </svg>
-            <!-- silicone spatula -->
+            <!-- rolling pin -->
             <svg viewBox="0 0 200 34" xmlns="http://www.w3.org/2000/svg">
-                <rect x="6" y="13" width="90" height="8" rx="4" fill="#C9A66B" />
-                <path d="M96 9c40-4 70 2 98 10-4 8-16 12-30 12-30 0-50-8-68-14z" fill="#8CA06B" />
+                <rect x="6" y="12" width="20" height="10" rx="4" fill="#F6F4EA" stroke="#C9A66B" stroke-width="1.5" />
+                <path d="M24 10 C 70 7, 130 7, 176 10 L176 24 C130 27, 70 27, 24 24 Z" fill="#C9A66B" />
+                <path d="M24 10 C 70 7, 130 7, 176 10 L176 15 C130 12.5, 70 12.5, 24 15 Z" fill="#DCC098"
+                    opacity="0.6" />
+                <rect x="174" y="12" width="20" height="10" rx="4" fill="#F6F4EA" stroke="#C9A66B" stroke-width="1.5" />
             </svg>
         </div>
 
@@ -204,6 +197,17 @@
 
         var galleryData = {}; // filled in after fetching manifest + captions
 
+        // Fisher-Yates shuffle — used once at page load to randomize photos that
+        // don't have an explicit "order" set in gallery.json.
+        function shuffle(arr) {
+            var a = arr.slice();
+            for (var i = a.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+            }
+            return a;
+        }
+
         async function loadGalleryData() {
             var gallery = await fetch('images/gallery.json').then(function (r) { return r.json(); });
 
@@ -214,7 +218,8 @@
                         return {
                             src: 'images/' + key + '/' + entry.file,
                             caption: entry.caption || '',
-                            preview: !!entry.preview
+                            preview: !!entry.preview,
+                            order: (typeof entry.order === 'number') ? entry.order : null
                         };
                     })
                 };
@@ -223,6 +228,15 @@
                 // the first few photos so the mosaic never ends up empty.
                 var favs = galleryData[key].items.filter(function (it) { return it.preview; });
                 galleryData[key].favourites = favs.length ? favs : galleryData[key].items.slice(0, 4);
+
+                // "browserItems" is the order photos appear in when "View all" is opened:
+                // anything with an explicit "order" number in gallery.json comes first
+                // (lowest number first); everything else is shuffled once here at page
+                // load and appended after.
+                var ordered = galleryData[key].items.filter(function (it) { return it.order !== null; })
+                    .sort(function (a, b) { return a.order - b.order; });
+                var unordered = shuffle(galleryData[key].items.filter(function (it) { return it.order === null; }));
+                galleryData[key].browserItems = ordered.concat(unordered);
             });
         }
 
@@ -297,7 +311,9 @@
                     tile.innerHTML = '<img src="' + item.src + '" alt="' + (item.caption || galleryData[key].title) + '" loading="lazy">';
                     grid.appendChild(tile);
 
-                    if (favourites.length > 1) scheduleCycle(tile, key);
+                    // Give each tile's very first cycle a different starting point (instead of
+                    // all four timers starting together at page load) so changes stay spread out.
+                    if (favourites.length > 1) scheduleCycle(tile, key, i * 2500);
                 }
             }
         }
@@ -335,7 +351,6 @@
             }, 600);
         }
 
-
         // ---- Lightbox ----
         var lightbox = document.getElementById('lightbox');
         var lightboxImg = document.getElementById('lightboxImg');
@@ -343,8 +358,8 @@
         var currentItems = [];
         var currentIndex = 0;
 
-        function openLightbox(categoryKey, src) {
-            currentItems = galleryData[categoryKey].items;
+        function openLightbox(categoryKey, src, listOverride) {
+            currentItems = listOverride || galleryData[categoryKey].items;
             currentIndex = currentItems.findIndex(function (it) { return it.src === src; });
             if (currentIndex === -1) currentIndex = 0;
             showImage();
@@ -401,7 +416,7 @@
         function openBrowser(key) {
             var data = galleryData[key];
             browserTitle.textContent = data.title;
-            browserPosts.innerHTML = data.items.map(function (item) {
+            browserPosts.innerHTML = data.browserItems.map(function (item) {
                 return '<div class="browser-post" data-category="' + key + '" data-src="' + item.src + '">' +
                     '<img src="' + item.src + '" alt="' + (item.caption || data.title) + '" loading="lazy">' +
                     (item.caption ? '<div class="caption">' + item.caption + '</div>' : '') +
@@ -413,7 +428,7 @@
 
         browserPosts.addEventListener('click', function (e) {
             var post = e.target.closest('.browser-post');
-            if (post) openLightbox(post.getAttribute('data-category'), post.getAttribute('data-src'));
+            if (post) openLightbox(post.getAttribute('data-category'), post.getAttribute('data-src'), galleryData[post.getAttribute('data-category')].browserItems);
         });
 
         document.getElementById('browserClose').addEventListener('click', function () {
